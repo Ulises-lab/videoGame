@@ -1,4 +1,4 @@
-# Video juego *'Name game'*
+# Video juego *🎮'Name game'*👾
 
 ### Diapositivas
 
