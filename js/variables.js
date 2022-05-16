@@ -9,9 +9,8 @@ let points = 0;
 
 let requestId;
 
+
 /*
 Piso aleatorio
  const color = ctx.fillStyle = "#58D68D";
-const floor = ctx.fillRect(0, 146, Math.floor(Math.random()*canvas.width), Math.floor(Math. */
-
-random()*canvas.height));
+const floor = ctx.fillRect(0, 146, Math.floor(Math.random()*canvas.width), Math.floor(Math..random()*canvas.height));*/

@@ -1,13 +1,23 @@
 body {
-    text-align: center;
-  }
+  text-align: center;
+}
+
+.box-one {
+  display: flex;
+  flex-direction: row;
+}
   
-  body h1 {
-    font-size: 30px;
+body h1 {
     text-transform: uppercase;
-  }
+    align-items: center;
+}
   
-  body button {
+button{
+  align-items: center;
+
+}
+
+body button {
     font-size: 20px;
     background-color: black;
     color: #fff;
@@ -16,10 +26,16 @@ body {
     box-shadow: 0;
     border-radius: 5px;
     margin-bottom: 20px;
-  }
+}
   
-  canvas {
+canvas {
     border: 1px solid black;
-    width: 800px;
+    width: 950px;
     height: 500px;
+    border-radius: 20px;
+}
+
+.child2-box{
+  width: 450px;
+  margin: 10px;
 }

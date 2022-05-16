@@ -25,7 +25,23 @@ class Background {
 }
 
 class Personaje {
-
+    constructor(){
+        this.x = x;
+        this.y = y;
+        this.index_x = 0;
+        this.index_y = 0;
+        this.personX = 0;
+        this.personY = 0;
+        this.imgStop = new Image()
+        this.imgLeft = new Image()
+        this.imgRigth = new Image()
+        this.imgStop.src = 'images/stopV3.png'
+        this.imgLeft.src = 'images/CamiIzq.png'
+        this.imgRigth.src = 'images/CamiDerec.png'
+    }
+    draw(){
+        
+    }
 }
 
 class Enemigo {
