@@ -1,34 +1,25 @@
-const ctx = document.getElementById('canvas').getContext('2d');
-const img = new Image();
+window.onload = function () {
 
-img.src = './videoGame/camiandoColumns.png';
+    const bg = new Background(canvas.width,canvas.height);
 
-let arrow_key = 0;
-let in_x = 0, in_y = 0, personX = 0, personY = 0;
-
-img.onload = function() {
-  ctx.drawImage(img, in_x*32,in_y*32,32,32,personX,personY,32,32);
-  in_x ++;
-  if(in_x > 4){
-      in_x = 0;
-  }
-  setTimeout('img.onload()',300);
-};
- 
-document.onkeydown = function(event){
-    if(event ==null){
-        arrow_key = window.event.keyCode;
-    }else{
-        arrow_key = event.keyCode;
+    document.getElementById('start').onclick = function() {
+        if(!requestId){
+            startGame()
+        }
     }
-    switch(arrow_key){
-        case 37: //Izq
-            personX = personX + 10;
-            in_y = 0;
-        break;
-        case 39: //Der
-            personX = personX + 10;
-            in_y = 0;
-        break;
+
+
+    function startGame(){
+        requestId = requestAnimationFrame(upDate);
     }
+
+    function upDate(){
+        frames ++;
+        ctx.clearRect(0,0,canvas.width,canvas.height);
+        bg.draw()        
+        if(requestId){
+            requestAnimationFrame(upDate);
+        }
+    }
+
 }
