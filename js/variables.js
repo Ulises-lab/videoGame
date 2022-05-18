@@ -8,17 +8,16 @@ let points = 0;
 let requestId;
 let requestID = false;
 
+let personX = 30;
+let personY = 120;
 let index_x = 0;
-let px= 70;
-let py =120;
-let teclap =0;
 
 const img_font = new Image()
 img_font.src = 'images/font.png'
 
-
-
-
+let then = Date.now();
+let now;
+let count  = 0;
 
 /* let teclap =0;
 let inx= 0;

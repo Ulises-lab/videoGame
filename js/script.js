@@ -2,10 +2,13 @@ window.onload = function () {
     
     ctx.drawImage(img_font,0,0,canvas.width,canvas.height);
        
-    //Juego
+    //Background images
     const bg = new Background(canvas.width,canvas.height);
-    const personaje = new Personaje(index_x);
-
+    
+    //Sprites Images Person
+    const personaje_stop = new Personaje_Stop();
+    const personaje_left = new Personaje_Left();
+    const personaje_rigth = new Personaje_Rigth();
 
     document.getElementById('start').onclick = function() {
          if(!requestId){
@@ -13,23 +16,40 @@ window.onload = function () {
         } 
     }
 
-
     function startGame(){
         requestId = requestAnimationFrame(upDate);
     }
 
     function upDate(){
-        // frames ++;
         ctx.clearRect(0,0,canvas.width,canvas.height);
         bg.draw()
-        console.log(personaje.draw.move_rigth)
-        index_x++;
-        if(index_x>3){
-            index_x=0;
-        }  
+
+        //personaje_left.draw() Mandar llamar solo al valor 
+        disparo1.draw()
         if(requestId){
             requestAnimationFrame(upDate);
         }
     }
+
+    
+    addEventListener('keydown',(event)=>{
+        if(event.keyCode === null){
+            personaje_stop.draw()
+            console.log(event)
+        }
+        if(event.keyCode === 39){
+            personaje_stop.personX +=10;
+            personaje_left.personX +=10;
+            personaje_rigth.personX +=10;
+            personaje_rigth.draw()
+        }
+        if(event.keyCode === 37){
+            personaje_stop.personX -=10;
+            personaje_left.personX -=10;
+            personaje_rigth.personX -=10;
+            personaje_left.draw()
+        }
+    })
+    
 
 }
