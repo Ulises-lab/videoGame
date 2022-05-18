@@ -1,5 +1,11 @@
 window.onload = function () {
     
+    ctx.drawImage(img_font,0,0,canvas.width,canvas.height);
+   
+    
+
+    
+
     //Introduccion
      /* ctx.fillStyle = "blue";
      ctx.fillRect(0, 146,canvas.width,canvas.height);
@@ -11,11 +17,13 @@ window.onload = function () {
 
     //Juego
     const bg = new Background(canvas.width,canvas.height);
+    const personaje = new Personaje(index_x);
+
 
     document.getElementById('start').onclick = function() {
-        if(!requestId){
+         if(!requestId){
             startGame()
-        }
+        } 
     }
 
 
@@ -24,9 +32,14 @@ window.onload = function () {
     }
 
     function upDate(){
-        frames ++;
+        // frames ++;
         ctx.clearRect(0,0,canvas.width,canvas.height);
-        bg.draw()        
+        bg.draw()
+        console.log(personaje.draw.move_rigth)
+        index_x++;
+        if(index_x>3){
+            index_x=0;
+        }  
         if(requestId){
             requestAnimationFrame(upDate);
         }

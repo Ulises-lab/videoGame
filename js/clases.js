@@ -25,11 +25,8 @@ class Background {
 }
 
 class Personaje {
-    constructor(){
-        this.x = x;
-        this.y = y;
-        this.index_x = 0;
-        this.index_y = 0;
+    constructor(index_x){
+        this.index_x = index_x;
         this.personX = 0;
         this.personY = 0;
         this.imgStop = new Image()
@@ -38,17 +35,52 @@ class Personaje {
         this.imgStop.src = 'images/stopV3.png'
         this.imgLeft.src = 'images/CamiIzq.png'
         this.imgRigth.src = 'images/CamiDerec.png'
-    }
+    };
     draw(){
-        
+        imgs = {
+            move_rigth: ctx.drawImage(this.imgRigth,this.index_x*64,10,64,64,70,120,32,32),
+            move_left: ctx.drawImage(this.imgLeft,this.index_x*64,10,64,64,this.personX,this.personY,32,32),
+            move_stop: ctx.drawImage(this.imgStop,this.index_x*64,10,64,64,this.personX,this.personY,32,32)
+        }
     }
 }
+
+document.onkeydown=function(event){
+    if(event == null){
+        teclap = windows.event.keyCode;
+    }else{
+        teclap = event.keyCode;
+    }
+    switch (teclap) {
+        case 39:
+            px = px+10;
+        break;          
+        case 37:
+            px = px-10;
+        break;
+    }
+}
+
+
 
 class Enemigo {
-
+    constructor(){}
 }
+
+
+
 
 class Disparo {
-
+    constructor(x,y,color){
+     this.x = x;
+     this.y = y;
+     this.color = color;
+    }
+    draw(){
+        ctx.arc(this.x, this.y, 1, 0, Math.PI * 2);
+        ctx.fillStyle = this.color;
+        ctx.fill();
+    }
 }
-
+const disparo1 = new Disparo(170,70,'gold');
+disparo1.draw()
