@@ -19,6 +19,10 @@ let then = Date.now();
 let now;
 let count  = 0;
 
+let stop_left_rigth;
+
+let audio = new Audio('SpaceMusicPack/slow-travel.wav')
+
 /* let teclap =0;
 let inx= 0;
 let px= 100;

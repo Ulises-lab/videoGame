@@ -10,9 +10,12 @@ window.onload = function () {
     const personaje_left = new Personaje_Left();
     const personaje_rigth = new Personaje_Rigth();
 
+    
+
     document.getElementById('start').onclick = function() {
          if(!requestId){
             startGame()
+            audio.play()
         } 
     }
 
@@ -23,31 +26,30 @@ window.onload = function () {
     function upDate(){
         ctx.clearRect(0,0,canvas.width,canvas.height);
         bg.draw()
-
-        //personaje_left.draw() Mandar llamar solo al valor 
+        personaje_stop.draw() //Mandar llamar solo al valor 
         disparo1.draw()
         if(requestId){
             requestAnimationFrame(upDate);
         }
     }
 
-    
     addEventListener('keydown',(event)=>{
-        if(event.keyCode === null){
+        /// VER ESCRITURA DE FUNCIONES DE PERSONAJE DEPENDIENDO DE LA FLECHA
+        /* if(event.keyCode === null){
             personaje_stop.draw()
-            console.log(event)
-        }
-        if(event.keyCode === 39){
+        } */
+        if(event.keyCode === 39 && personaje_stop.personX < 240){
             personaje_stop.personX +=10;
-            personaje_left.personX +=10;
+            console.log(personaje_stop.personX)
+            /* personaje_left.personX +=10;
             personaje_rigth.personX +=10;
-            personaje_rigth.draw()
+            personaje_rigth.draw() */
         }
-        if(event.keyCode === 37){
+        if(event.keyCode === 37 && personaje_stop.personX > 5){
             personaje_stop.personX -=10;
-            personaje_left.personX -=10;
+            /* personaje_left.personX -=10;
             personaje_rigth.personX -=10;
-            personaje_left.draw()
+            personaje_left.draw() */
         }
     })
     
