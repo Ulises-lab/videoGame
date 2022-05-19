@@ -10,7 +10,9 @@ window.onload = function () {
     const personaje_left = new Personaje_Left();
     const personaje_rigth = new Personaje_Rigth();
 
-    
+
+    // Idea para cambio de imagen
+    const personaje_general = [personaje_stop,personaje_left,personaje_rigth]
 
     document.getElementById('start').onclick = function() {
          if(!requestId){
@@ -26,7 +28,8 @@ window.onload = function () {
     function upDate(){
         ctx.clearRect(0,0,canvas.width,canvas.height);
         bg.draw()
-        personaje_stop.draw() //Mandar llamar solo al valor 
+        //personaje_stop.draw() //Mandar llamar solo al valor 
+        personaje_general[i].draw();
         disparo1.draw()
         if(requestId){
             requestAnimationFrame(upDate);
@@ -34,24 +37,24 @@ window.onload = function () {
     }
 
     addEventListener('keydown',(event)=>{
-        /// VER ESCRITURA DE FUNCIONES DE PERSONAJE DEPENDIENDO DE LA FLECHA
-        /* if(event.keyCode === null){
-            personaje_stop.draw()
-        } */
-        if(event.keyCode === 39 && personaje_stop.personX < 240){
-            personaje_stop.personX +=10;
-            console.log(personaje_stop.personX)
-            /* personaje_left.personX +=10;
-            personaje_rigth.personX +=10;
-            personaje_rigth.draw() */
+        /// Escritura de imagenes dependiendo de la flecha
+        if(event.keyCode === 39 && personaje_left.personX < 240){
+            personaje_stop.personX +=3;
+            personaje_left.personX +=3;
+            personaje_rigth.personX +=3;
+            i = 2;
         }
-        if(event.keyCode === 37 && personaje_stop.personX > 5){
-            personaje_stop.personX -=10;
-            /* personaje_left.personX -=10;
-            personaje_rigth.personX -=10;
-            personaje_left.draw() */
+        if(event.keyCode === 37 && personaje_rigth.personX > 5){
+            personaje_stop.personX -=3;
+            personaje_left.personX -=3;
+            personaje_rigth.personX -=3;
+            i = 1;
         }
+        
     })
     
+    addEventListener('keyup',(event)=>{
+            i = 0;
+        })
 
 }

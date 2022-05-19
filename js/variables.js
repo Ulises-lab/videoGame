@@ -22,7 +22,7 @@ let count  = 0;
 let stop_left_rigth;
 
 let audio = new Audio('SpaceMusicPack/slow-travel.wav')
-
+let i =0;
 
 /*
 Piso aleatorio
