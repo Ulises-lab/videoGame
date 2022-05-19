@@ -1,6 +1,9 @@
 const canvas = document.getElementById('canvas')
 const ctx = canvas.getContext('2d')
 
+ctx.webkitImageSmoothingEnabled = false;
+ctx.imageSmoothingEnabled = false;
+
 let frames = 0;
 const gravity = 0.1;
 const enemigs = [];
@@ -22,7 +25,7 @@ let count  = 0;
 let stop_left_rigth;
 
 const audio = new Audio('SpaceMusicPack/slow-travel.wav')
-let i =0;
+let i = 0;
 
 const arrBullet = [];
 const arrEnemy = [];

@@ -4,16 +4,21 @@ window.onload = function () {
        
     //Background images
     const bg = new Background(canvas.width,canvas.height);
-    
+
     //Sprites Images Person
     const personaje_stop = new Personaje_Stop();
+    const personaje_stop_left = new Personaje_StopLeft();
     const personaje_left = new Personaje_Left();
     const personaje_rigth = new Personaje_Rigth();
 
-
     // Idea para cambio de imagen
-    const personaje_general = [personaje_stop,personaje_left,personaje_rigth]
+    const personaje_general = [personaje_stop,personaje_left,personaje_rigth,personaje_stop_left]
 
+    console.log('Valor',personaje_general[i].personX)
+
+    const disparo = new Disparo(personaje_general[i].personX+32,personaje_general[i].personY+11,'yellow');
+
+    
     document.getElementById('start').onclick = function() {
          if(!requestId){
             startGame()
@@ -30,7 +35,7 @@ window.onload = function () {
         bg.draw()
         //personaje_stop.draw() //Mandar llamar solo al valor 
         personaje_general[i].draw();
-        disparo1.draw()
+        disparo.draw()
         if(requestId){
             requestAnimationFrame(upDate);
         }
@@ -40,12 +45,14 @@ window.onload = function () {
         /// Escritura de imagenes dependiendo de la flecha
         if(event.keyCode === 39 && personaje_left.personX < 240){
             personaje_stop.personX +=3;
+            personaje_stop_left.personX +=3;
             personaje_left.personX +=3;
             personaje_rigth.personX +=3;
             i = 2;
         }
         if(event.keyCode === 37 && personaje_rigth.personX > 5){
             personaje_stop.personX -=3;
+            personaje_stop_left.personX -=3;
             personaje_left.personX -=3;
             personaje_rigth.personX -=3;
             i = 1;
@@ -54,7 +61,12 @@ window.onload = function () {
     })
     
     addEventListener('keyup',(event)=>{
+        if(event.keyCode === 39){
             i = 0;
-        })
+        }
+        if(event.keyCode === 37){
+            i = 3;
+        }
+    })
 
 }

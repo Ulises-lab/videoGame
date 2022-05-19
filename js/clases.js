@@ -59,6 +59,41 @@ class Personaje_Stop {
     }
 }
 
+class Personaje_StopLeft {
+    constructor(){
+        this.index_x = index_x;
+        this.personX = personX;
+        this.personY = personY;
+        this.now = now;
+        this.then = then;
+        this.count = count;
+        this.imgStop = new Image()        
+        this.imgStop.src = 'images/stopLeftV3.png'
+    };
+    draw(){
+        ctx.drawImage(this.imgStop,this.index_x*64,10,64,64,this.personX,this.personY,32,32)
+        //Velocidad de frames //
+        this.now = Date.now()
+        let difference = this.now - this.then;
+        if(difference>300){
+            this.count++
+            this.then = this.now
+            this.index_x ++;
+            if(this.index_x>3){
+            this.index_x =0}
+        }
+        /////////////////////////
+    }
+    collition(item){
+        return (
+            this.personX < item.personX + item.width &&
+            this.personX > this.width + item.personX &&
+            this.personY < item.personY + item.height &&
+            this.personY < this.height + item.personY
+        )
+    }
+}
+
 class Personaje_Left {
     constructor(){
         this.index_x = index_x;
@@ -131,7 +166,19 @@ class Personaje_Rigth {
 
 
 class Enemigo {
-    constructor(){}
+    constructor(){
+
+
+    }
+
+    collition(item){
+        return (
+            this.personX < item.personX + item.width &&
+            this.personX > this.width + item.personX &&
+            this.personY < item.personY + item.height &&
+            this.personY < this.height + item.personY
+        )
+    }
 }
 
 
@@ -141,12 +188,15 @@ class Disparo {
      this.x = x;
      this.y = y;
      this.color = color;
+     this.vx = 2;
     }
     draw(){
+        this.x += this.vx;
+        ctx.beginPath();
         ctx.arc(this.x, this.y, 1, 0, Math.PI * 2);
+        ctx.closePath();
         ctx.fillStyle = this.color;
         ctx.fill();
     }
 }
 
-const disparo1 = new Disparo(170,70,'gold');
