@@ -148,4 +148,5 @@ class Disparo {
         ctx.fill();
     }
 }
+
 const disparo1 = new Disparo(170,70,'gold');
