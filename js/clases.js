@@ -22,13 +22,18 @@ class Background {
         ctx.drawImage(this.img2,this.x,this.y,this.width,this.height);
         ctx.drawImage(this.img2,this.x+this.width,this.y,this.width,this.height);
     }
+    game_over(){
+        ctx.font = 'bold 20px arial';
+        ctx.fillStyle = 'white';
+        ctx.fillText('Juego Terminado',75,canvas.height/2);
+    }
 }
 
 class Personaje_Stop {
     constructor(){
         this.index_x = index_x;
-        this.personX = personX;
-        this.personY = personY;
+        this.x = personX;
+        this.y = personY;
         this.now = now;
         this.then = then;
         this.count = count;
@@ -36,7 +41,7 @@ class Personaje_Stop {
         this.imgStop.src = 'images/stopV3.png'
     };
     draw(){
-        ctx.drawImage(this.imgStop,this.index_x*64,10,64,64,this.personX,this.personY,32,32)
+        ctx.drawImage(this.imgStop,this.index_x*64,0,64,64,this.x,this.y,32,32)
         //Velocidad de frames //
         this.now = Date.now()
         let difference = this.now - this.then;
@@ -51,10 +56,10 @@ class Personaje_Stop {
     }
     collition(item){
         return (
-            this.personX < item.personX + item.width &&
-            this.personX > this.width + item.personX &&
-            this.personY < item.personY + item.height &&
-            this.personY < this.height + item.personY
+            this.x < item.x + item.width &&
+            this.x + this.width > item.x &&
+            this.y < item.y + item.height &&
+            this.y + this.height > item.y
         )
     }
 }
@@ -62,8 +67,8 @@ class Personaje_Stop {
 class Personaje_StopLeft {
     constructor(){
         this.index_x = index_x;
-        this.personX = personX;
-        this.personY = personY;
+        this.x = personX;
+        this.y = personY;
         this.now = now;
         this.then = then;
         this.count = count;
@@ -71,7 +76,7 @@ class Personaje_StopLeft {
         this.imgStop.src = 'images/stopLeftV3.png'
     };
     draw(){
-        ctx.drawImage(this.imgStop,this.index_x*64,10,64,64,this.personX,this.personY,32,32)
+        ctx.drawImage(this.imgStop,this.index_x*64,0,64,64,this.x,this.y,32,32)
         //Velocidad de frames //
         this.now = Date.now()
         let difference = this.now - this.then;
@@ -86,10 +91,10 @@ class Personaje_StopLeft {
     }
     collition(item){
         return (
-            this.personX < item.personX + item.width &&
-            this.personX > this.width + item.personX &&
-            this.personY < item.personY + item.height &&
-            this.personY < this.height + item.personY
+            this.x < item.x + item.width &&
+            this.x + this.width > item.x &&
+            this.y < item.y + item.height &&
+            this.y + this.height > item.y
         )
     }
 }
@@ -97,8 +102,8 @@ class Personaje_StopLeft {
 class Personaje_Left {
     constructor(){
         this.index_x = index_x;
-        this.personX = personX;
-        this.personY = personY;
+        this.x = personX;
+        this.y = personY;
         this.now = now;
         this.then = then;
         this.count = count;
@@ -106,7 +111,7 @@ class Personaje_Left {
         this.imgLeft.src = 'images/CamiIzq.png'
     };
     draw(){
-        ctx.drawImage(this.imgLeft,this.index_x*64,10,64,64,this.personX,this.personY,32,32)
+        ctx.drawImage(this.imgLeft,this.index_x*64,0,64,64,this.x,this.y,32,32)
         // Velocidad de frames //
         this.now = Date.now()
         let difference = this.now - this.then;
@@ -121,10 +126,10 @@ class Personaje_Left {
     }
     collition(item){
         return (
-            this.personX < item.personX + item.width &&
-            this.personX > this.width + item.personX &&
-            this.personY < item.personY + item.height &&
-            this.personY < this.height + item.personY
+            this.x < item.x + item.width &&
+            this.x + this.width > item.x &&
+            this.y < item.y + item.height &&
+            this.y + this.height > item.y
         )
     }
 }
@@ -132,8 +137,8 @@ class Personaje_Left {
 class Personaje_Rigth {
     constructor(){
         this.index_x = index_x;
-        this.personX = personX;
-        this.personY = personY;
+        this.x = personX;
+        this.y = personY;
         this.now = now;
         this.then = then;
         this.count = count;
@@ -141,7 +146,7 @@ class Personaje_Rigth {
         this.imgRigth.src = 'images/CamiDerec.png'
     };
     draw(){
-        ctx.drawImage(this.imgRigth,this.index_x*64,10,64,64,this.personX,this.personY,32,32)
+        ctx.drawImage(this.imgRigth,this.index_x*64,0,64,64,this.x,this.y,32,32)
         // Velocidad de frames //
         this.now = Date.now()
         let difference = this.now - this.then;
@@ -156,34 +161,95 @@ class Personaje_Rigth {
     }
     collition(item){
         return (
-            this.personX < item.personX + item.width &&
-            this.personX > this.width + item.personX &&
-            this.personY < item.personY + item.height &&
-            this.personY < this.height + item.personY
+            this.x < item.x + item.width &&
+            this.x + this.width > item.x &&
+            this.y < item.y + item.height &&
+            this.y + this.height > item.y
         )
     }
 }
 
-
-class Enemigo {
+class Gusano {
     constructor(){
-
-
+    this.x = canvas.width;
+    this.y = 115;
+    this.index_x = index_x;
+    this.width = 32;
+    this.height = 32;
+    this.now = now;
+    this.then = then;
+    this.count = count;
+    this.img = new Image()
+    this.img.src = 'images/gusano1.png'
+    }
+    draw(){
+        this.x --;
+        ctx.drawImage(this.img,this.index_x*32,0,32,32,this.x,this.y,this.width,this.height)
+        this.now = Date.now()
+        let difference = this.now - this.then;
+        if(difference>200){
+            this.count++
+            this.then = this.now
+            this.index_x ++;
+            if(this.index_x>7){
+            this.index_x =0}
+        }
     }
 
     collition(item){
         return (
-            this.personX < item.personX + item.width &&
-            this.personX > this.width + item.personX &&
-            this.personY < item.personY + item.height &&
-            this.personY < this.height + item.personY
+            this.x < item.x + item.width &&
+            this.x > this.width + item.x &&
+            this.y < item.y + item.height &&
+            this.y < this.height + item.y
         )
     }
 }
 
+class Arania {
+    constructor(){
+    this.x = [canvas.width,aleatorio];
+    this.y = [120,0];
+    this.index_x = index_x;
+    this.random1 = random1;
+    this.width = 25;
+    this.height = 25;
+    this.now = now;
+    this.then = then;
+    this.count = count;
+    this.img = new Image()
+    this.img.src = 'images/spider.png'
+    }
+
+    draw(){
+        if(this.random1 === 0){
+            this.x[this.random1] --;
+        }else{
+            this.y[this.random1] ++;
+        }
+        ctx.drawImage(this.img,this.index_x*32,0,32,32,this.x[this.random1],this.y[this.random1],this.width,this.height);
+        this.now = Date.now()
+        let difference = this.now - this.then;
+        if(difference>300){
+            this.count++
+            this.then = this.now
+            this.index_x ++;
+            if(this.index_x>7){
+            this.index_x =0}
+        }
+    }
+
+    collition(item){
+        return (
+            this.x < item.x + item.width &&
+            this.x > this.width + item.x &&
+            this.y < item.y + item.height &&
+            this.y < this.height + item.y
+        )
+    }
+}
 
 class Disparo {
-    //Va a depender de quien lo haya generado, es decir, personaje o enemigo
     constructor(x,y,color){
      this.x = x;
      this.y = y;
@@ -193,10 +259,9 @@ class Disparo {
     draw(){
         this.x += this.vx;
         ctx.beginPath();
-        ctx.arc(this.x, this.y, 1, 0, Math.PI * 2);
+        ctx.arc(this.x, this.y, 2, 0, Math.PI * 2);
         ctx.closePath();
         ctx.fillStyle = this.color;
         ctx.fill();
     }
 }
-

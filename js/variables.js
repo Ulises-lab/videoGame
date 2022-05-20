@@ -4,15 +4,13 @@ const ctx = canvas.getContext('2d')
 ctx.webkitImageSmoothingEnabled = false;
 ctx.imageSmoothingEnabled = false;
 
-let frames = 0;
 const gravity = 0.1;
-const enemigs = [];
 let points = 0;
 let requestId;
 let requestID = false;
 
 let personX = 30;
-let personY = 120;
+let personY = 115;
 let index_x = 0;
 
 const img_font = new Image()
@@ -28,7 +26,13 @@ const audio = new Audio('SpaceMusicPack/slow-travel.wav')
 let i = 0;
 
 const arrBullet = [];
-const arrEnemy = [];
+const arrEnemys = [];
+
+let score = 0;
+
+let aleatorio = Math.floor((Math.random()*(canvas.width-64))+2);
+let random1 = Math.floor(Math.random()*2);
+
 
 /*
 Piso aleatorio
