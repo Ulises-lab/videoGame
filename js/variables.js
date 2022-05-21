@@ -34,6 +34,10 @@ let aleatorio = Math.floor((Math.random()*(canvas.width-64))+2);
 let random1 = Math.floor(Math.random()*2);
 
 
+
+
+
+const marioImg = ['https://bit.ly/2L7yH3f','https://art.pixilart.com/33b1bbc23398be7.png']
 /*
 Piso aleatorio
  const color = ctx.fillStyle = "#58D68D";

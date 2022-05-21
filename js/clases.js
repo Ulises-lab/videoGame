@@ -37,11 +37,14 @@ class Personaje_Stop {
         this.now = now;
         this.then = then;
         this.count = count;
+        this.width = 32;
+        this.height = 32;
         this.imgStop = new Image()        
         this.imgStop.src = 'images/stopV3.png'
-    };
+    }
     draw(){
-        ctx.drawImage(this.imgStop,this.index_x*64,0,64,64,this.x,this.y,32,32)
+        //ctx.drawImage(this.imgStop,this.x,this.y,20,20);
+        ctx.drawImage(this.imgStop,this.index_x*64,0,64,64,this.x,this.y,this.width,this.height)
         //Velocidad de frames //
         this.now = Date.now()
         let difference = this.now - this.then;
@@ -52,15 +55,21 @@ class Personaje_Stop {
             if(this.index_x>3){
             this.index_x =0}
         }
-        /////////////////////////
     }
-    collition(item){
-        return (
-            this.x < item.x + item.width &&
-            this.x + this.width > item.x &&
-            this.y < item.y + item.height &&
-            this.y + this.height > item.y
+    collision(item){
+        return(
+            this.x -8 < item.x + item.width &&
+            this.x -8 + this.width > item.x &&
+            this.y -4 < item.y + item.height &&
+            this.y -4 + this.height > item.y
         )
+        /* if(
+            this.x - 8 > item.x + item.width ||
+            this.x - 8 + this.width < item.x ||
+            this.y -7 > item.y + item.height ||
+            this.y -7 + this.height < item.y
+        ){}
+        else{return true} */
     }
 }
 
@@ -90,7 +99,7 @@ class Personaje_StopLeft {
         /////////////////////////
     }
     collition(item){
-        return (
+        return(
             this.x < item.x + item.width &&
             this.x + this.width > item.x &&
             this.y < item.y + item.height &&
@@ -171,10 +180,10 @@ class Personaje_Rigth {
 
 class Gusano {
     constructor(){
-    this.x = canvas.width;
+    this.x = 100; //Inicio del gusano en el canvas
     this.y = 115;
     this.index_x = index_x;
-    this.width = 32;
+    this.width = 32; //tamanio
     this.height = 32;
     this.now = now;
     this.then = then;
@@ -196,12 +205,12 @@ class Gusano {
         }
     }
 
-    collition(item){
+    collision(item){
         return (
             this.x < item.x + item.width &&
-            this.x > this.width + item.x &&
+            this.x + this.width > item.x &&
             this.y < item.y + item.height &&
-            this.y < this.height + item.y
+            this.y + this.height > item.y
         )
     }
 }

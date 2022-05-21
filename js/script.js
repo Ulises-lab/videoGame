@@ -16,12 +16,13 @@ window.onload = function () {
     const personaje_general = [personaje_stop,personaje_left,personaje_rigth,personaje_stop_left]
 
     //Disparos
-    const disparo = new Disparo(personaje_general[i].x+32,personaje_general[i].y+11,'yellow');
+    const disparo = new Disparo(personaje_general[i].x+16,personaje_general[i].y+16,'yellow');
 
     //Enemigos
     const gusano = new Gusano();
     const arania = new Arania();
-    
+   
+    //Boton de clic
     document.getElementById('start').onclick = function() {
          if(!requestId){
             startGame()
@@ -33,19 +34,24 @@ window.onload = function () {
         requestId = requestAnimationFrame(upDate);
     }
 
+    //Dibujar imagenes
     function upDate(){
         ctx.clearRect(0,0,canvas.width,canvas.height);
         bg.draw()
         //personaje_stop.draw() //Mandar llamar solo al valor 
         personaje_general[i].draw();
-        
+        //mario.dibujar()
+        //enemy.dibujar()
         gusano.draw();
-        arania.draw();
+        //arania.draw();
         disparo.draw();
-        console.log(personaje_general[i].x)
-        if(personaje_general[0].collition(gusano)||gusano.collition(personaje_general[0])){
+        /*console.log('arraypersona',personaje_general[i].x)
+        console.log('persona',personaje_stop.x);
+        */
+        if(personaje_general[i].collision(gusano)){
             console.log('me estan tocando')
-        }
+            return 'me estan tocando'
+        };
         if(requestId){
             requestAnimationFrame(upDate);
         }
