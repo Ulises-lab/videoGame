@@ -3,8 +3,11 @@ window.onload = function () {
     ctx.drawImage(img_font,0,0,canvas.width,canvas.height)
     ctx.font = 'bold 11px arial';
     ctx.fillStyle = 'white';
-    ctx.fillText('INSTRUCCIONES.',105,45);
+    ctx.fillText('Instrucciones.',105,55);
     ctx.fillText('No permitas que los enemigos te toquen.',40,canvas.height/2);
+    ctx.font = 'bold 11px arial';
+    ctx.fillStyle = 'Black';
+    ctx.fillText('ARGOS',125,35);
     //Background images
     const bg = new Background(canvas.width,canvas.height);
 
