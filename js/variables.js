@@ -7,10 +7,9 @@ ctx.imageSmoothingEnabled = false;
 const gravity = 0.1;
 let points = 0;
 let requestId;
-let requestID = false;
 
 let personX = 30;
-let personY = 115;
+let personY = 122;
 let index_x = 0;
 
 const img_font = new Image()
@@ -25,19 +24,16 @@ let stop_left_rigth;
 const audio = new Audio('SpaceMusicPack/slow-travel.wav')
 let i = 0;
 
-const arrBullet = [];
-const arrEnemys = [];
+let n;
 
-let score = 0;
+const arrBalas = [];
+const arrGusanos = [];
+const arrAranias =[];
 
-let aleatorio = Math.floor((Math.random()*(canvas.width-64))+2);
+//let x = Math.floor(Math.random()*(125-9)+11);
 let random1 = Math.floor(Math.random()*2);
 
-
-
-
-
-const marioImg = ['https://bit.ly/2L7yH3f','https://art.pixilart.com/33b1bbc23398be7.png']
+let ciclos = 0;
 /*
 Piso aleatorio
  const color = ctx.fillStyle = "#58D68D";

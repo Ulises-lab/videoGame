@@ -43,8 +43,7 @@ class Personaje_Stop {
         this.imgStop.src = 'images/stopV3.png'
     }
     draw(){
-        //ctx.drawImage(this.imgStop,this.x,this.y,20,20);
-        ctx.drawImage(this.imgStop,this.index_x*64,0,64,64,this.x,this.y,this.width,this.height)
+        ctx.drawImage(this.imgStop,this.index_x*64,0,64,64,this.x,this.y,this.width,this.height)        
         //Velocidad de frames //
         this.now = Date.now()
         let difference = this.now - this.then;
@@ -98,7 +97,7 @@ class Personaje_StopLeft {
         }
         /////////////////////////
     }
-    collition(item){
+    collision(item){
         return(
             this.x < item.x + item.width &&
             this.x + this.width > item.x &&
@@ -133,7 +132,7 @@ class Personaje_Left {
         }
         /////////////////////////
     }
-    collition(item){
+    collision(item){
         return (
             this.x < item.x + item.width &&
             this.x + this.width > item.x &&
@@ -168,7 +167,7 @@ class Personaje_Rigth {
         }
         /////////////////////////
     }
-    collition(item){
+    collision(item){
         return (
             this.x < item.x + item.width &&
             this.x + this.width > item.x &&
@@ -179,9 +178,9 @@ class Personaje_Rigth {
 }
 
 class Gusano {
-    constructor(){
-    this.x = 100; //Inicio del gusano en el canvas
-    this.y = 115;
+    constructor(y){
+    this.x = 300; //Inicio del gusano en el canvas
+    this.y = y;
     this.index_x = index_x;
     this.width = 32; //tamanio
     this.height = 32;
@@ -193,7 +192,7 @@ class Gusano {
     }
     draw(){
         this.x --;
-        ctx.drawImage(this.img,this.index_x*32,0,32,32,this.x,this.y,this.width,this.height)
+        ctx.drawImage(this.img,this.index_x*32,0,32,32,this.x,this.y,this.width,this.height)    
         this.now = Date.now()
         let difference = this.now - this.then;
         if(difference>200){
@@ -216,9 +215,10 @@ class Gusano {
 }
 
 class Arania {
-    constructor(){
-    this.x = [canvas.width,aleatorio];
-    this.y = [120,0];
+    constructor(x){
+    this.x = x;
+    this.arr = [canvas.width,this.x];
+    this.y = [122,0];
     this.index_x = index_x;
     this.random1 = random1;
     this.width = 25;
@@ -232,11 +232,20 @@ class Arania {
 
     draw(){
         if(this.random1 === 0){
-            this.x[this.random1] --;
-        }else{
-            this.y[this.random1] ++;
+            this.arr[this.random1] --;
+            ctx.drawImage(this.img,this.index_x*32,0,32,32,this.arr[this.random1],this.y[this.random1],this.width,this.height);
         }
-        ctx.drawImage(this.img,this.index_x*32,0,32,32,this.x[this.random1],this.y[this.random1],this.width,this.height);
+        else if(this.y[this.random1]===124){ 
+            this.y[this.random1] = 124;
+            this.arr[this.random1]--;
+            ctx.drawImage(this.img,this.index_x*32,0,32,32,this.arr[this.random1],this.y[this.random1],this.width,this.height);
+        }
+        else if(this.random1 === 1 && this.y[this.random1]<124){
+            this.y[this.random1] ++;
+            ctx.drawImage(this.img,this.index_x*32,0,32,32,this.arr[this.random1],this.y[this.random1],this.width,this.height);
+        }
+        /* this.arr[this.random1]--;
+        ctx.drawImage(this.img,this.index_x*32,0,32,32,this.arr[this.random1],this.y[this.random1],this.width,this.height); */
         this.now = Date.now()
         let difference = this.now - this.then;
         if(difference>300){
@@ -248,7 +257,7 @@ class Arania {
         }
     }
 
-    collition(item){
+    collision(item){
         return (
             this.x < item.x + item.width &&
             this.x > this.width + item.x &&
@@ -262,15 +271,24 @@ class Disparo {
     constructor(x,y,color){
      this.x = x;
      this.y = y;
+     this.width = 2;
      this.color = color;
      this.vx = 2;
     }
     draw(){
         this.x += this.vx;
         ctx.beginPath();
-        ctx.arc(this.x, this.y, 2, 0, Math.PI * 2);
+        ctx.arc(this.x, this.y, this.width, 0, Math.PI * 2);
         ctx.closePath();
         ctx.fillStyle = this.color;
         ctx.fill();
+    }
+    collision(item){
+        return (
+            this.x < item.x + item.width &&
+            this.x > this.width + item.x &&
+            this.y < item.y + item.height &&
+            this.y < this.height + item.y
+        )
     }
 }
