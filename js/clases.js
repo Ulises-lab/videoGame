@@ -57,9 +57,9 @@ class Personaje_Stop {
     }
     collision(item){
         return(
-            this.x -8 < item.x + item.width &&
+            this.x +8 < item.x + item.width &&
             this.x -8 + this.width > item.x &&
-            this.y -4 < item.y + item.height &&
+            this.y +4 < item.y + item.height &&
             this.y -4 + this.height > item.y
         )
         /* if(
@@ -218,7 +218,7 @@ class Arania {
     constructor(x){
     this.x = x;
     this.arr = [canvas.width,this.x];
-    this.y = [122,0];
+    this.y = 0//[122,0];
     this.index_x = index_x;
     this.random1 = random1;
     this.width = 25;
@@ -231,18 +231,18 @@ class Arania {
     }
 
     draw(){
-        if(this.random1 === 0){
+        /* if(this.random1 === 0){
             this.arr[this.random1] --;
             ctx.drawImage(this.img,this.index_x*32,0,32,32,this.arr[this.random1],this.y[this.random1],this.width,this.height);
-        }
-        else if(this.y[this.random1]===124){ 
+        } 
+        if(this.y[this.random1]===124){ 
             this.y[this.random1] = 124;
             this.arr[this.random1]--;
             ctx.drawImage(this.img,this.index_x*32,0,32,32,this.arr[this.random1],this.y[this.random1],this.width,this.height);
-        }
-        else if(this.random1 === 1 && this.y[this.random1]<124){
-            this.y[this.random1] ++;
-            ctx.drawImage(this.img,this.index_x*32,0,32,32,this.arr[this.random1],this.y[this.random1],this.width,this.height);
+        }*/
+        if(this.random1 === 1 && this.y <124){ //this.y[this.random1]
+            this.y ++;
+            ctx.drawImage(this.img,this.index_x*32,0,32,32,this.arr[this.random1],this.y,this.width,this.height);
         }
         /* this.arr[this.random1]--;
         ctx.drawImage(this.img,this.index_x*32,0,32,32,this.arr[this.random1],this.y[this.random1],this.width,this.height); */

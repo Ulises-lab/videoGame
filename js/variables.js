@@ -24,14 +24,14 @@ let stop_left_rigth;
 const audio = new Audio('SpaceMusicPack/slow-travel.wav')
 let i = 0;
 
-let n;
+let n=1;
 
 const arrBalas = [];
 const arrGusanos = [];
 const arrAranias =[];
 
 //let x = Math.floor(Math.random()*(125-9)+11);
-let random1 = Math.floor(Math.random()*2);
+let random1 = 1// Math.floor(Math.random()*2);
 
 let ciclos = 0;
 /*

@@ -1,7 +1,10 @@
 window.onload = function () {
 
     ctx.drawImage(img_font,0,0,canvas.width,canvas.height)
-   
+    ctx.font = 'bold 11px arial';
+    ctx.fillStyle = 'white';
+    ctx.fillText('INSTRUCCIONES.',105,45);
+    ctx.fillText('No permitas que los enemigos te toquen.',40,canvas.height/2);
     //Background images
     const bg = new Background(canvas.width,canvas.height);
 
@@ -34,22 +37,24 @@ window.onload = function () {
         ctx.clearRect(0,0,canvas.width,canvas.height);
         bg.draw()
         personaje_general[i].draw();
-        //arania.draw();
-        dibujaBala()
-        //disparo.draw();
+        //dibujaBala()
+        puntaje();
         genera_gusanos()
         genera_aranias()
         dibujaGusanos()
         dibujaAranias()
+        if(points === 50){
+        ganador()
+    return}
         if(requestId){
             requestAnimationFrame(upDate);
         }
     }
 
     function genera_gusanos(){
-        if(ciclos % 399 === 0 || ciclos % 60===0){
+        if(ciclos % 120 === 0){
             let y = Math.floor(Math.random()*(125-9)+11);
-            if(y > 110 && y < 127){
+            if(y > 0 && y < 127){
                 const gusano = new Gusano(y);
                 arrGusanos.push(gusano);
             }
@@ -60,14 +65,14 @@ window.onload = function () {
     function dibujaGusanos(){
         arrGusanos.forEach((item,index_item)=>{
             if(item.x +item.width <= -4){
-                points ++;
                 arrGusanos.splice(index_item,1)
+                points ++;
             }
             item.draw()
-            /* if(personaje_general[i].collision(item)){
+            if(personaje_general[i].collision(item)){
                 requestId = undefined;
                 bg.game_over()
-            } */
+            }
         })
     }
 
@@ -83,34 +88,48 @@ window.onload = function () {
 
     function dibujaAranias(){
         arrAranias.forEach((item,index_item)=>{
-            if(item.x +item.width <= -4){
-                points ++;
+            if(item.y + item.height >= 130){
                 arrAranias.splice(index_item,1)
+                points ++;
             }
             item.draw()
-            /* if(personaje_general[i].collision(item)){
+            if(personaje_general[i].collision(item)){
                 requestId = undefined;
                 bg.game_over()
-            } */
+            }
         })
     }
 
+    function ganador(){
+        ctx.font = 'bold 20px arial';
+        ctx.fillStyle = 'gold';
+        ctx.fillText(`GANASTE :D`,100,canvas.height/2);
+    }
+
+
+    function puntaje(){
+        ctx.font = 'bold 9px arial';
+        ctx.fillStyle = 'white';
+        ctx.fillText(`Puntos ${points}`,canvas.width-45,10);
+    }
+
     function genera_disparo(){
-        const disparo = new Disparo(personaje_general[i].x+16,personaje_general[i].y+16,'yellow');
+        const disparo = new Disparo(personaje_general[i].x+16,personaje_general[i].y+16,'yellow',n);
         arrBalas.push(disparo);
     }
 
     function dibujaBala(){
         arrBalas.forEach((item,index_item)=>{
-            if(item.x + item.width > 30){
-                arrAranias.splice(index_item,1)
+            if(item.x +item.width <= 0 || item.x +item.width >300){
+                arrBalas.splice(index_item,1)
             }
-            // if(i === 2 || i === 3){
-            //     item.draw(-1)}
-            // if(i === 0 || i === 1){
-            //     item.draw(1)
-            // }
-            item.draw(1)
+            item.draw()
+            for(z =0; z<arrGusanos.length;z++){
+            if(item.collision(arrGusanos[z])){
+                arrBalas.splice(index_item,z)
+                arrGusanos.splice(z,1);
+            }
+            }
         })
     }
 
@@ -118,6 +137,7 @@ window.onload = function () {
     addEventListener('keydown',(event)=>{
         /// Escritura de imagenes dependiendo de la flecha
         if(event.keyCode === 39 && personaje_left.x < 240){
+            event.preventDefault();
             personaje_stop.x +=3;
             personaje_stop_left.x +=3;
             personaje_left.x +=3;
@@ -125,14 +145,34 @@ window.onload = function () {
             i = 2;
         }
         if(event.keyCode === 37 && personaje_rigth.x > 5){
+            event.preventDefault();
             personaje_stop.x -=3;
             personaje_stop_left.x -=3;
             personaje_left.x -=3;
             personaje_rigth.x -=3;
             i = 1;
         }
-        if(event.keyCode === 32){
+        if(event.keyCode === 83 && personaje_stop.y > 0){
+            event.preventDefault();
+            personaje_stop.y -=3;
+            personaje_stop_left.y -=3;
+            personaje_left.y -=3;
+            personaje_rigth.y -=3;
+        }
+
+        if(event.keyCode === 32 && personaje_stop.y <122){
+            event.preventDefault();
+            personaje_stop.y +=3;
+            personaje_stop_left.y +=3;
+            personaje_left.y +=3;
+            personaje_rigth.y +=3;
+        }
+        if(event.keyCode === 65){
+            event.preventDefault();
             genera_disparo()
+        }
+        if(event.keyCode === 71){
+            points = 50
         }
     })
     
